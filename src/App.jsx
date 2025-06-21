@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AddTasks from "./components/AddTasks";
 import Tasks from "./components/Tasks";
+import { v4 } from "uuid";
 
 function App() {
   const [task, setTask] = useState([
@@ -33,13 +34,24 @@ function App() {
     setTask(newTask);
   }
 
+  function onAddTaskSubmit(title, description) {
+    const newTask = {
+      id: v4(),
+      title: title,
+      description: description,
+      isCompleted: false,
+    };
+
+    setTask([...task, newTask]);
+  }
+
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
       <div className="w-[500] space-y-4">
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Task
         </h1>
-        <AddTasks />
+        <AddTasks onAddTaskSubmit={onAddTaskSubmit} />
         <Tasks tasks={task} onTaskClick={onTaskClick} deleteTask={deleteTask} />
       </div>
     </div>
