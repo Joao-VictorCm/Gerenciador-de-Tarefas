@@ -5,7 +5,10 @@ function Tasks({ tasks, onTaskClick, deleteTask }) {
   const navigate = useNavigate();
 
   function onDetailsClick(task) {
-    navigate(`/detalhes?title=${task.title}&description=${task.description}`);
+    const query = new URLSearchParams();
+    query.set("title", task.title);
+    query.set("description", task.description);
+    navigate(`/detalhes?${query.toString()}`);
   }
 
   return (
