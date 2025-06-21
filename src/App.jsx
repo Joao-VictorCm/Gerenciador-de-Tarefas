@@ -28,14 +28,19 @@ function App() {
     setTask(newTasks);
   }
 
+  function deleteTask(taskId) {
+    const newTask = task.filter((task) => task.id !== taskId);
+    setTask(newTask);
+  }
+
   return (
     <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
-      <div className="w-[500]">
+      <div className="w-[500] space-y-4">
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciador de Task
         </h1>
-        <Tasks tasks={task} onTaskClick={onTaskClick} />
         <AddTasks />
+        <Tasks tasks={task} onTaskClick={onTaskClick} deleteTask={deleteTask} />
       </div>
     </div>
   );
